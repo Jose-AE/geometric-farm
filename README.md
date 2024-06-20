@@ -1,11 +1,10 @@
-<div align="center"><img  width="200" height="200" src="https://i.imgur.com/uTRKqi1.png"></div>
-<h1 align="center">Geometric Farm Backend/Frontend</h1>
+<div align="center"><img  width="200" height="200" src="https://i.imgur.com/lJgIXDC.png"></div>
+<h1 align="center">Geometric Farm</h1>
 
 <h2>About</h2>
-WIP
-
-<h2>Goal and requirements</h2>
-WIP
+This project is an educational math video game developed in collaboration with Escuela Metropolitana, a top-ranked elementary school in Mexico City. The game is tailored to their curriculum standards and aims to engage students in learning various mathematical concepts through interactive gameplay mechanics.
+The video game covers key math topics such as shape definitions, arithmetic operations, area calculations, and more. The content is designed to align with different grade levels, ensuring that students are presented with appropriate challenges based on their current level of understanding.
+In addition to the game itself, the project includes a backend analytics system that tracks individual and cohort progress, storing data in a mySQL database. The collected data is then visualized through a web-based teacher dashboard, providing insightful representations such as leaderboards, success/failure rates, progress percentages, and maximum scores achieved by level.
 
 <h2>Installation</h2>
 
@@ -21,13 +20,13 @@ Make sure you have the following prerequisites installed on your system:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/tc2005b-202411-543/team5-web.git
+   git clone https://github.com/Jose-AE/geometric-farm.git
    ```
 
 2. **Navigate to the Project Directory**
 
    ```bash
-   cd team5-web
+   cd geometric-farm
    ```
 
 3. **Run Containers**
@@ -35,7 +34,7 @@ Make sure you have the following prerequisites installed on your system:
    Use Docker Compose to spin up all the necessary containers:
 
    ```bash
-   docker-compose up
+   docker compose up
    ```
 
 4. **Access Frontend**
@@ -54,16 +53,7 @@ Make sure you have the following prerequisites installed on your system:
 
    The MySQL server instance can be accessed at:
 
-   [http://localhost:3306](http://localhost:3306)
-
-<h2>Contributing</h2>
-WIP
-
-<h2>Project status</h2>
-WIP
-
-<h2>Credits</h2>
-WIP
+   localhost:3306
 
 <h2>Copyright</h2>
 This project is licensed under the terms of the GNU General Public v3.0 License. See <a href="LICENSE">license</a>

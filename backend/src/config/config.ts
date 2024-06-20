@@ -7,9 +7,9 @@ const APP_PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || "sadfnjkds313jfb";
 
 const MYSQL_HOST = process.env.MYSQL_HOST || "database";
-const MYSQL_DATABASE = process.env.MYSQL_DATABASE || "db";
-const MYSQL_USER = process.env.MYSQL_USER || "user";
-const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD || "osomar";
+const MYSQL_DATABASE = process.env.MYSQL_DATABASE || "geometric-farm-db";
+const MYSQL_USER = process.env.MYSQL_USER || "root";
+const MYSQL_PASSWORD = process.env.MYSQL_PASSWORD || "password1234";
 const MYSQL_PORT = parseInt(process.env.MYSQL_PORT as string) || 3306;
 
 const MYSQL = {

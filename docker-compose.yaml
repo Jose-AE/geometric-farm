@@ -1,5 +1,7 @@
 services: #"Components" that form the app (names can be anything )
   frontend:
+    container_name: geometric-farm-frontend
+
     build: ./frontend #Build image from dockerfile inside frontend folder
     ports:
       - 5173:5173 #map port 5173 on the container to port 5173 on PC
@@ -14,9 +16,15 @@ services: #"Components" that form the app (names can be anything )
           path: ./frontend/package.json #rebuild image when local dir changes
 
   backend:
+    container_name: geometric-farm-backend
     build: ./backend #Build image from dockerfile inside backend folder
     ports:
       - 3000:3000 #map port 3000 on the container to port 3000 on PC
+    depends_on:
+      database:
+        condition: service_healthy
+
+
     develop:
       watch: #when ran on watch mode
         - action: sync
@@ -28,20 +36,21 @@ services: #"Components" that form the app (names can be anything )
           path: ./backend/package.json #rebuild image when local dir changes
 
   database:
+    container_name: geometric-farm-database
+
     image: mysql:8.0.17 #instead of using docker file to build database image, pull image from dockerhub
     ports:
       - 3306:3306
 
     environment:
-      MYSQL_DATABASE: "db"
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: "user"
-      # You can use whatever password you like
-      MYSQL_PASSWORD: "osomar"
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: "osomar"
+      MYSQL_DATABASE: "geometric-farm-db"
+      MYSQL_ROOT_PASSWORD: "password1234"
 
-      MYSQL_ROOT_HOST: "%"
+    healthcheck:
+        test: "/usr/bin/mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute \"SHOW DATABASES;\""
+        interval: 2s
+        timeout: 20s
+        retries: 10
 
     volumes:
       - AppDatabaseVolume:/var/lib/mysql #map this directory inside the container to the volume named AppDatabaseVolume

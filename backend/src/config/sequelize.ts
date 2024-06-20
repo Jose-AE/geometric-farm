@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import config from "./config";
+import User from "../models/user.model";
 
 export const sequelize = new Sequelize(
   config.mysql.database,
@@ -28,8 +29,32 @@ export async function initSequelize() {
     .sync()
     .then((result) => {
       console.log("DB models synced");
+      ensureBaseUser();
     })
     .catch((err) => {
       console.log(err);
     });
+}
+
+
+
+
+async function ensureBaseUser() {
+  const baseUsername = 'admin';
+  const basePassword = 'password1234';
+  try {
+    const user = await User.findAll();
+
+    if (user.length === 0) {
+      await User.create({
+        is_admin: true,
+        group: "",
+        password: basePassword,
+        username: baseUsername
+      });
+      console.log('Base user created successfully.');
+    }
+  } catch (error) {
+    console.error('Error ensuring base user:', error);
+  }
 }
