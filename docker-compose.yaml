@@ -1,0 +1,51 @@
+services: #"Components" that form the app (names can be anything )
+  frontend:
+    build: ./frontend #Build image from dockerfile inside frontend folder
+    ports:
+      - 5173:5173 #map port 5173 on the container to port 5173 on PC
+    develop:
+      watch: #when ran on watch mode
+        - action: sync
+          path: ./frontend/src #sync files at local dir
+          target: ./app/src #update files at dir on container
+          ignore:
+            - node_modules #dont sync node modules
+        - action: rebuild
+          path: ./frontend/package.json #rebuild image when local dir changes
+
+  backend:
+    build: ./backend #Build image from dockerfile inside backend folder
+    ports:
+      - 3000:3000 #map port 3000 on the container to port 3000 on PC
+    develop:
+      watch: #when ran on watch mode
+        - action: sync
+          path: ./backend/src #sync files at local dir
+          target: ./app/src #update files at dir on container
+          ignore:
+            - node_modules #dont sync node modules
+        - action: rebuild
+          path: ./backend/package.json #rebuild image when local dir changes
+
+  database:
+    image: mysql:8.0.17 #instead of using docker file to build database image, pull image from dockerhub
+    ports:
+      - 3306:3306
+
+    environment:
+      MYSQL_DATABASE: "db"
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: "user"
+      # You can use whatever password you like
+      MYSQL_PASSWORD: "osomar"
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: "osomar"
+
+      MYSQL_ROOT_HOST: "%"
+
+    volumes:
+      - AppDatabaseVolume:/var/lib/mysql #map this directory inside the container to the volume named AppDatabaseVolume
+
+volumes:
+  AppDatabaseVolume: #create a volume named AppMainVolume if it doesnt exist
+
